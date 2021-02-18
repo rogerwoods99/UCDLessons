@@ -23,3 +23,22 @@ r = requests.get(url)
 html_doc = r.text
 soup = BeautifulSoup(html_doc, features="html.parser")
 print(soup.prettify())
+
+#####################################################
+#  Beautiful soup part 2
+
+print('#################################################')
+print('Beautiful Soup part 2')
+print('#################################################')
+import requests
+from bs4 import BeautifulSoup
+url = 'https://www.python.org/~guido/'
+r = requests.get(url)
+html_doc = r.text
+soup = BeautifulSoup(html_doc, features="html.parser")
+print(soup.title)    # print the title of the document
+#guido_text=soup.get_text()
+#print(guido_text)  # print the text of the document
+a_tags =soup.find_all("a")   # find
+for link in a_tags:    # loop through and print the links
+    print(link.get('href'))
