@@ -1,4 +1,7 @@
 import pandas as pd
+import numpy as pd
+import matplotlib.pyplot as plt
+
 filename= 'winequality-red.csv'
 data = pd.read_csv(filename)
 print(data.head())
@@ -18,8 +21,6 @@ print(data_array)
 print(type(data_array))
 
 # Import corrupted Titanic file and apply extra functions of read_csv
-# Import matplotlib.pyplot as plt
-import matplotlib.pyplot as plt
 
 # Assign filename: file
 file = 'titanic_corrupt.txt'
@@ -35,3 +36,8 @@ pd.DataFrame.hist(data[['Age']])
 plt.xlabel('Age (years)')
 plt.ylabel('count')
 plt.show()
+
+#  example of how to set the dtype for a particular column if there are issues with merging tables
+
+cal = pd.read_csv("cal.txt")
+ridership = pd.read_csv("ridership.txt",dtype={"station_id":object,"year":np.int64,"month":np.int64,"day":np.int64,"rides":np.int64})

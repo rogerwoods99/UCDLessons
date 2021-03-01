@@ -20,3 +20,4 @@ data
 
 print(data.shape[0])   # print number of rows in a NP array
 print(data.shape[1])   # print number of columns in a NP array
+
