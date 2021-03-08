@@ -3,18 +3,44 @@ import matplotlib.pyplot as plt
 
 # load Seattle and Austin weather data
 filename1= 'austin_weather2014.csv'
-austin = pd.read_csv(filename1)
+#austin = pd.read_csv(filename1)
 
 filename2= 'seattle-weather 2014.csv'
-seattle = pd.read_csv(filename2)
-print(austin.columns)
-print(seattle)
+#seattle = pd.read_csv(filename2)
+#print(austin.columns)
+#print(seattle)
+
+
+# plot temp graphs on same axes
+
+filename1= 'austin_weather2014 NEW.txt'
+austin_id = pd.read_csv(filename1,parse_dates=["date"],index_col=["date"])
+austin=austin_id
+filename2= 'seattle-weather 2014 NEW.txt'
+seattle_id = pd.read_csv(filename2,parse_dates=["date"],index_col=["date"])
+seattle=seattle_id
+
+plt.style.use("ggplot")   # specifies nicer looking output
+#plt.style.use("seaborn-colorblind")   # specifies nicer looking output
+#plt.style.use("default")
+fig, ax = plt.subplots()
+fig.set_size_inches([10,8])
+ax.plot(seattle_id.index,seattle_id["temp_maxF"])
+ax.plot(austin_id.index,austin_id["TempHighF"])
+#ax.plot(austin_id["date"],austin_id["TempHighF"])
+ax.set_xlabel("Day of year")
+ax.set_ylabel("Max Temperature (F)")
+#ax[0].set_title("Max Temps in Austin and Seattle")
+plt.show()
+#fig.savefig("Temp Graph.png")
+
+
 
 # define an array of 1 column and 2 rows and share the y axis limits
 fig, ax = plt.subplots(2,1,sharey=True)
 
-ax[0].plot(seattle["date"],seattle["temp_maxF"],marker="o",linestyle="--")
-ax[1].plot(austin["date"],austin["TempHighF"],marker="^",linestyle="dotted")
+ax[0].plot(seattle.index,seattle["temp_maxF"],marker="o",linestyle="--")
+ax[1].plot(austin.index,austin["TempHighF"],marker="^",linestyle="dotted")
 ax[1].set_xlabel("Day of year")
 ax[0].set_ylabel("Max Temperature (F)")
 ax[1].set_ylabel("Max Temperature (F)")
@@ -25,10 +51,10 @@ ax[0].set_title("Max Temps in Austin and Seattle")
 # repeat the above but this time use the indexing function
 
 # load Seattle and Austin weather data
-filename1= 'austin_weather2014.csv'
+#filename1= 'austin_weather2014.txt'
 austin_id = pd.read_csv(filename1,parse_dates=["date"],index_col=["date"])
 
-filename2= 'seattle-weather 2014.csv'
+#filename2= 'seattle-weather 2014.txt'
 seattle_id = pd.read_csv(filename2,parse_dates=["date"],index_col=["date"])
 print(austin.columns)
 print(seattle_id)
@@ -62,6 +88,6 @@ fig, ax = plt.subplots()
 plot_timeseries(ax,seattle_id.index, seattle_id["temp_maxF"],"blue","Time","Max Temp")
 ax2=ax.twinx()
 plot_timeseries(ax2,seattle_id.index, seattle_id["precipitation"],"red","Time","Precipitation")
-ax.annotate(">24 deg", xy=[seattle_id.TimeStamp("2014-02-02"),24])
+#ax.annotate(">24 deg", xy=[seattle_id.TimeStamp("2014-02-02"),24])
 
-plt.show()
+#plt.show()
